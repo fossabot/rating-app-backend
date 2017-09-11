@@ -1,0 +1,25 @@
+{
+  "name": "rating-app-backend",
+  "version": "1.0.0",
+  "description": "Rating app backend api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bill-Niz/rating-app-backend.git"
+  },
+  "author": "Bill Nizeyimana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bill-Niz/rating-app-backend/issues"
+  },
+  "homepage": "https://github.com/Bill-Niz/rating-app-backend#readme",
+  "dependencies": {
+    "body-parser": "^1.18.0",
+    "express": "^4.15.4",
+    "jwt-simple": "^0.5.1",
+    "morgan": "^1.8.2"
+  }
+}
