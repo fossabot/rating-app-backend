@@ -1,6 +1,6 @@
 var ObjectID = require('mongodb').ObjectID;
 const COLLECTION_NAME = "feedback";
-const COLLECTION_APPLICATION = "feedback";
+
 
 module.exports = function (db) {
 

@@ -1,16 +1,20 @@
 var express = require('express');
 var router = express.Router();
-var auth = require('./authentification');
+
 
 
 
 module.exports = function(db){
 
+    var user = require('./user')(db);
     var application = require('./applications')(db);
     var comment = require('./comment')(db);
     var feedback = require('./feedback')(db);
 
-    router.post('/login', auth.login);
+
+    router.post('/api/v1/register', user.register);
+    router.post('/api/v1/login', user.login);
+
 
     router.get('/api/v1/applications', application.getAll);
     router.get('/api/v1/application/:id', application.getOne);
