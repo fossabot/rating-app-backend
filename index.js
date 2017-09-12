@@ -3,8 +3,11 @@ var logger           = require('morgan');
 var bodyParser       = require('body-parser');
 const MongoClient    = require('mongodb').MongoClient;
 const db             = require('./config/db');
+var helmet           = require('helmet');
 
 var app = express();
+
+app.use(helmet());
 
 MongoClient.connect(db.url, function(err, database) {
     if (err) return console.log(err);
@@ -23,7 +26,6 @@ MongoClient.connect(db.url, function(err, database) {
         }
     });
 
-    //app.all('/api/v1/*', [require('./middlewares/validate')]);
     app.use('/', require('./routes')(database));
 
     app.use(function(req, res, next) {
@@ -32,7 +34,7 @@ MongoClient.connect(db.url, function(err, database) {
         next(err);
     });
 
-    app.set('port', process.env.PORT || 3000);
+    app.set('port', process.env.PORT || 80);
 
     var server = app.listen(app.get('port'), function() {
         console.log(' Server listening on port ' + server.address().port);

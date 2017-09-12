@@ -21,8 +21,6 @@ module.exports = function (db) {
         login: function(req, res) {
             var user = req.body;
             db.collection(COLLECTION_NAME).findOne({'_id':user.email,'password':user.password}).then(function (item) {
-                console.log(item);
-
                 if(item){
                     if(new Date().getTime() < item.token.expires){
                         res.json(item);
