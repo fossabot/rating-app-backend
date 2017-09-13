@@ -1,11 +1,15 @@
-let express          = require('express');
-let logger           = require('morgan');
-let bodyParser       = require('body-parser');
+const express        = require('express');
+const logger         = require('morgan');
+const bodyParser     = require('body-parser');
+const https          = require('https');
 const MongoClient    = require('mongodb').MongoClient;
 const db             = require('./config/db');
-let helmet           = require('helmet');
+const helmet         = require('helmet');
+const fs             = require('fs');
 
 let app = express();
+
+
 
 app.use(helmet());
 
@@ -34,9 +38,15 @@ MongoClient.connect(db.url, (err, database) => {
         next(err);
     });
 
-    app.set('port', process.env.PORT || 80);
+
+    /*app.set('port', process.env.PORT || 80);
 
     let server = app.listen(app.get('port'), function() {
         console.log(' Server listening on port ' + server.address().port);
-    });
+    });*/
+
+    https.createServer({
+        key: fs.readFileSync('./privatekey.pem'),
+        cert: fs.readFileSync('./server.crt')
+    }, app).listen(443);
 });
