@@ -9,6 +9,7 @@ module.exports =  (db) => {
             const user = req.body;
             user._id = user.email;
             user.token = genToken();
+            user.avatar = 'https://api.adorable.io/avatars/120/'+ user.name +'@adorable.png'
             db.collection(COLLECTION_NAME).insertOne(user).then(function (result) {
                 res.json(result.ops[0]);
             }).catch(function (err) {
