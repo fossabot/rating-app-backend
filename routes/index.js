@@ -20,10 +20,10 @@ module.exports = (db) => {
     router.get('/api/v1/application/:id', application.getOne);
     router.post('/api/v1/application/', application.create);
 
-    router.get('/api/v1/feedbacks', feedback.getAll);
+    router.post('/api/v1/feedbacks', feedback.getList);
     router.post('/api/v1/feeback/application/:id', [require('../middlewares/validate')], feedback.create);
 
-    router.get('/api/v1/comments', comment.getAll);
+    router.post('/api/v1/comments', comment.getList);
     router.post('/api/v1/comment/feedback/:id', [require('../middlewares/validate')], comment.create);
     router.post('/api/v1/comment/notation/:id', [require('../middlewares/validate')], comment.notate);
 

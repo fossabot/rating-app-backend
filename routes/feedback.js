@@ -6,9 +6,13 @@ module.exports =  (db) => {
 
     const feedback = {
 
-        getAll: (req, res) => {
-            db.collection(COLLECTION_NAME).find({}).toArray().then( (items) => {
-                res.json(items);
+        getList: (req, res) => {
+
+            const feedbacks = req.body;
+            const listFeed = feedbacks.map((data)=> new ObjectID(data._id));
+            console.log(listFeed);
+            db.collection(COLLECTION_NAME).find({_id: { $in: listFeed }}).toArray().then((item) => {
+                res.json(item);
             }).catch( (err) => {
                 res.status(401);
                 res.json(err);
@@ -29,6 +33,7 @@ module.exports =  (db) => {
         create: (req, res) => {
             const feedback = req.body;
             feedback.date = new Date();
+            feedback.comments = [];
             const applicationId = req.params.id;
 
             db.collection(COLLECTION_NAME).insertOne(feedback).then( (result) => {

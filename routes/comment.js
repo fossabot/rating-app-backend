@@ -5,10 +5,14 @@ module.exports =  (db)  => {
 
     const comment = {
 
-        getAll: (req, res) => {
-            db.collection(COLLECTION_NAME).find({}).toArray().then( (items)  => {
-                res.json(items);
-            }).catch( (err) =>  {
+        getList: (req, res) => {
+
+            const comments = req.body;
+            const listComm = comments.map((data)=> new ObjectID(data._id));
+            console.log(listComm);
+            db.collection(COLLECTION_NAME).find({_id: { $in: listComm }}).toArray().then((item) => {
+                res.json(item);
+            }).catch( (err) => {
                 res.status(401);
                 res.json(err);
             });
