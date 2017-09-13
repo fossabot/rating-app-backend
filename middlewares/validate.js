@@ -4,7 +4,7 @@ module.exports = (req, res, next)  => {
 
     if(req.method === 'OPTIONS') next();
 
-    const token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
+    const token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-api-key'];
 
     if (token) {
         try {

@@ -25,6 +25,7 @@ module.exports = (db) => {
 
     router.get('/api/v1/comments', comment.getAll);
     router.post('/api/v1/comment/feedback/:id', [require('../middlewares/validate')], comment.create);
+    router.post('/api/v1/comment/notation/:id', [require('../middlewares/validate')], comment.notate);
 
     return router;
 };

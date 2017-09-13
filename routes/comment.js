@@ -27,6 +27,7 @@ module.exports =  (db)  => {
 
         create: (req, res)  => {
             const comment = req.body;
+            comment.notation = 0;
             comment.date = new Date();
             const applicationId = req.params.id;
             db.collection(COLLECTION_NAME).insertOne(comment).then( (result) =>  {
@@ -40,6 +41,24 @@ module.exports =  (db)  => {
                 res.status(401);
                 res.json(err);
             });
+        },
+
+        notate : (req, res) =>{
+            const id = req.params.id;
+            const note = req.body;
+            const objId = { '_id': new ObjectID(id) };
+            if(note.notation === 1 || note.notation === -1  || note.notation === 0){
+                db.collection(COLLECTION_NAME).updateOne(objId,{$inc:{notation:note.notation}}).then((result) =>{
+                    res.json(result);
+                }).catch( (err) =>  {
+                    res.status(401);
+                    res.json(err);
+                });
+            }else{
+                res.status(401);
+                res.json({message:'Notation have to be -1 0 1'});
+            }
+
         }
     };
 
