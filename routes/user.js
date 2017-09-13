@@ -1,7 +1,5 @@
 const jwt = require('jwt-simple');
-const ObjectID = require('mongodb').ObjectID;
 const COLLECTION_NAME = "user";
-
 
 module.exports =  (db) => {
 
@@ -31,7 +29,6 @@ module.exports =  (db) => {
                             res.json(item);
                         });
                     }
-
                 }else{
                     res.status(401);
                     res.json({'message':"Bad email ot password"});
