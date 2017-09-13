@@ -1,15 +1,15 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 
 
 
-module.exports = function(db){
+module.exports = (db) => {
 
-    var user = require('./user')(db);
-    var application = require('./applications')(db);
-    var comment = require('./comment')(db);
-    var feedback = require('./feedback')(db);
+    const user = require('./user')(db);
+    const application = require('./applications')(db);
+    const comment = require('./comment')(db);
+    const feedback = require('./feedback')(db);
 
 
     router.post('/api/v1/register', user.register);

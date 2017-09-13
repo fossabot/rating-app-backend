@@ -1,42 +1,42 @@
-var ObjectID = require('mongodb').ObjectID;
+const ObjectID = require('mongodb').ObjectID;
 const COLLECTION_NAME = "comment";
 
-module.exports = function (db) {
+module.exports =  (db)  => {
 
-    var comment = {
+    const comment = {
 
-        getAll: function(req, res) {
-            db.collection(COLLECTION_NAME).find({}).toArray().then(function (items) {
+        getAll: (req, res) => {
+            db.collection(COLLECTION_NAME).find({}).toArray().then( (items)  => {
                 res.json(items);
-            }).catch(function (err) {
+            }).catch( (err) =>  {
                 res.status(401);
                 res.json(err);
             });
         },
 
-        getOne: function(req, res) {
-            var id = req.params.id;
+        getOne: (req, res) =>  {
+            const id = req.params.id;
             const objId = { '_id': new ObjectID(id) };
-            db.collection(COLLECTION_NAME).findOne(objId).then(function (item) {
+            db.collection(COLLECTION_NAME).findOne(objId).then( (item) =>  {
                 res.json(item);
-            }).catch(function (err) {
+            }).catch( (err) =>  {
                 res.status(401);
                 res.json(err);
             });
         },
 
-        create: function(req, res) {
-            var comment = req.body;
+        create: (req, res)  => {
+            const comment = req.body;
             comment.date = new Date();
-            var applicationId = req.params.id;
-            db.collection(COLLECTION_NAME).insertOne(comment).then(function (result) {
-                var comm = result.ops[0];
+            const applicationId = req.params.id;
+            db.collection(COLLECTION_NAME).insertOne(comment).then( (result) =>  {
+                const comm = result.ops[0];
 
-                var feedBackAPI = require('./feedback')(db);
-                return feedBackAPI.addComment(applicationId,comm._id).then(function (r) {
+                const feedBackAPI = require('./feedback')(db);
+                return feedBackAPI.addComment(applicationId,comm._id).then( (r)  => {
                     res.json(comm);
                 });
-            }).catch(function (err) {
+            }).catch( (err) =>  {
                 res.status(401);
                 res.json(err);
             });
