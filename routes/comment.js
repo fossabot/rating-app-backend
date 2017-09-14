@@ -52,7 +52,11 @@ module.exports =  (db)  => {
             const note = req.body;
             const objId = { '_id': new ObjectID(id) };
             if(note.notation === 1 || note.notation === -1  || note.notation === 0){
-                db.collection(COLLECTION_NAME).updateOne(objId,{$inc:{notation:note.notation}}).then((result) =>{
+                db.collection(COLLECTION_NAME).updateOne(objId,
+                    {
+                        $inc:{notation:note.notation},
+                        $addToSet:{"notations":note}
+                    }).then((result) =>{
                     res.json(result);
                 }).catch( (err) =>  {
                     res.status(401);
