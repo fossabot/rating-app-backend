@@ -10,7 +10,7 @@ module.exports =  (db)  => {
             const comments = req.body;
             const listComm = comments.map((data)=> new ObjectID(data._id));
             console.log(listComm);
-            db.collection(COLLECTION_NAME).find({_id: { $in: listComm }}).toArray().then((item) => {
+            db.collection(COLLECTION_NAME).find({_id: { $in: listComm }}).sort( { notation: -1 } ).toArray().then((item) => {
                 res.json(item);
             }).catch( (err) => {
                 res.status(401);

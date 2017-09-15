@@ -32,7 +32,7 @@ module.exports =  (db) => {
                     }
                 }else{
                     res.status(401);
-                    res.json({'message':"Bad email ot password"});
+                    res.json({'message':"Bad email or password"});
                 }
             }).catch( (err) => {
                 res.status(401);
