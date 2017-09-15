@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "required": ["notation","user"],
+  "properties": {
+    "notation": {
+      "type": "integer"
+    },
+    "user": {
+      "type": "object",
+      "required": ["name","_id","avatar"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        }
+      },
+      "description": "user info"
+    }
+  },
+  "description": "note info"
+}

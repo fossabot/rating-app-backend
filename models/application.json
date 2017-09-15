@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "required": ["name","description","image"],
+  "properties": {
+    "image": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  },
+  "description": "application info"
+}

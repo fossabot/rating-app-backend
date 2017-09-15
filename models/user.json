@@ -1,6 +1,6 @@
 {
   "type": "object",
-  "required": ["name","email","password"],
+  "required": ["email","password"],
   "properties": {
     "_id": {
       "type": "string"

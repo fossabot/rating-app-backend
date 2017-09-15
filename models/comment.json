@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "required": ["text","user"],
+  "properties": {
+    "text": {
+      "type": "string"
+    },
+    "user": {
+      "type": "object",
+      "required": ["name","_id","avatar"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        }
+      },
+      "description": "user info"
+    }
+  },
+  "description": "comment info"
+}
