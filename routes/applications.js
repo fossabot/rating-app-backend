@@ -28,6 +28,7 @@ module.exports =  (db)  =>  {
         create: (req, res) =>  {
             const application = req.body;
             application.rating = 0;
+            application.feedbacks = [];
             db.collection(COLLECTION_NAME).insertOne(application).then( (result) =>  {
                 res.json(result.ops[0]);
             }).catch( (err) =>  {

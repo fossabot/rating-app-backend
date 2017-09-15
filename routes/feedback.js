@@ -9,8 +9,9 @@ module.exports =  (db) => {
         getList: (req, res) => {
 
             const feedbacks = req.body;
+            console.log(feedbacks);
             const listFeed = feedbacks.map((data)=> new ObjectID(data._id));
-            console.log(listFeed);
+
             db.collection(COLLECTION_NAME).find({_id: { $in: listFeed }}).sort( { date: -1 } ).toArray().then((item) => {
                 res.json(item);
             }).catch( (err) => {
@@ -51,7 +52,7 @@ module.exports =  (db) => {
                 ]).toArray().then( (items) =>  {
                     const appAPI = require('./applications')(db);
                     appAPI.addFeedback(applicationId,feed._id,items[0].avgRating).then( (r) => {
-                        feedback.avgRating = items[0].avgRating;
+                        feedback.avgRating = items[0].avgRating
                         res.json(feed);
 
                     }).catch( (err) => {
