@@ -51,8 +51,9 @@ module.exports =  (db) => {
                     }
                 ]).toArray().then( (items) =>  {
                     const appAPI = require('./applications')(db);
-                    appAPI.addFeedback(applicationId,feed._id,items[0].avgRating).then( (r) => {
-                        feedback.avgRating = items[0].avgRating
+                    const avg = items[0].avgRating.toFixed(1);
+                    appAPI.addFeedback(applicationId,feed._id,avg).then( (r) => {
+                        feedback.avgRating = avg;
                         res.json(feed);
 
                     }).catch( (err) => {
