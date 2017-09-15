@@ -35,10 +35,13 @@ module.exports =  (db)  =>  {
                 res.json(err);
             });
         },
-        addFeedback:  (appId,feedbackId)  => {
+        addFeedback:  (appId,feedbackId,avgRating)  => {
             const app = { '_id': new ObjectID(appId) };
             const feedback = { '_id': new ObjectID(feedbackId) };
-            return db.collection(COLLECTION_NAME).updateOne(app,{$addToSet:{"feedbacks":feedback}})
+            return db.collection(COLLECTION_NAME).updateOne(app,{
+                $addToSet:{"feedbacks":feedback},
+                $set: {rating: avgRating}
+            });
         }
     };
 

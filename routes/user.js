@@ -1,5 +1,6 @@
 const jwt = require('jwt-simple');
 const COLLECTION_NAME = "user";
+var UserModel = require('../models/user.json');
 
 module.exports =  (db) => {
 

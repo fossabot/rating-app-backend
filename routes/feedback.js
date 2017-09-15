@@ -32,16 +32,34 @@ module.exports =  (db) => {
 
         create: (req, res) => {
             const feedback = req.body;
+            const applicationId = req.params.id;
             feedback.date = new Date();
             feedback.comments = [];
-            const applicationId = req.params.id;
+            feedback.applicationId = applicationId;
 
             db.collection(COLLECTION_NAME).insertOne(feedback).then( (result) => {
                 const feed = result.ops[0];
-                const appAPI = require('./applications')(db);
-                appAPI.addFeedback(applicationId,feed._id).then( (r) => {
-                    res.json(feed);
+
+                db.collection(COLLECTION_NAME).aggregate([
+                    {$match: {applicationId: applicationId}}
+                    , {$group:
+                        {
+                            _id: null,
+                            avgRating: { $avg: "$rating" }
+                        }
+                    }
+                ]).toArray().then( (items) =>  {
+                    const appAPI = require('./applications')(db);
+                    appAPI.addFeedback(applicationId,feed._id,items[0].avgRating).then( (r) => {
+                        res.json(feed);
+
+                    }).catch( (err) => {
+                        console.log(err);
+                        res.status(401);
+                        res.json(err);
+                    });
                 });
+
             }).catch( (err) => {
                 res.status(401);
                 res.json(err);

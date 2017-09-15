@@ -66,7 +66,6 @@ module.exports =  (db)  => {
                 res.status(401);
                 res.json({message:'Notation have to be -1 0 1'});
             }
-
         }
     };
 
