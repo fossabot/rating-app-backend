@@ -18,7 +18,7 @@ module.exports = (db) => {
 
 
     router.post('/api/v1/register', [require('../middlewares/validateInput')(registerModel)], user.register);
-    router.post('/api/v1/login',[require('../middlewares/validateInput')(loginModel)], user.login);
+    router.post('/api/v1/login', [require('../middlewares/validateInput')(loginModel)], user.login);
 
 
     router.get('/api/v1/applications', application.getAll);
