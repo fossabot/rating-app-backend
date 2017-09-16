@@ -6,7 +6,7 @@ module.exports =  (db)  =>  {
     const applications = {
 
         getAll: (req, res) =>  {
-            db.collection(COLLECTION_NAME).find({}).toArray().then( (items) =>  {
+            db.collection(COLLECTION_NAME).find({}).sort( { rating: -1 } ).toArray().then( (items) =>  {
                 res.json(items);
             }).catch( (err)  => {
                 res.status(401);
