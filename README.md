@@ -1,6 +1,8 @@
 # Rating App Backend
 
 Backend for rating application
+* Server api :  https://rating-serve.herokuapp.com/
+* Client : https://bill-niz.github.io/rating-app/
 
 ## Usage
 
