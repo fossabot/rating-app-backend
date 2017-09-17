@@ -16,9 +16,7 @@ module.exports = (db) => {
     const application = require('./applications')(db);
     const comment = require('./comment')(db);
     const feedback = require('./feedback')(db);
-    const _cache     = apicache.middleware;
-
-
+    
     router.post('/api/v1/register', [require('../middlewares/validateInput')(registerModel)], user.register);
     router.post('/api/v1/login', [require('../middlewares/validateInput')(loginModel)], user.login);
 
