@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Bill-Niz/rating-app-backend#readme",
   "dependencies": {
+    "apicache": "^1.0.0",
     "body-parser": "^1.18.0",
     "express": "^4.15.4",
     "helmet": "^3.8.1",

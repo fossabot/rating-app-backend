@@ -8,8 +8,6 @@ const helmet         = require('helmet');
 
 let app = express();
 
-
-
 app.use(helmet());
 
 MongoClient.connect(db.url, (err, database) => {

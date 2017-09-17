@@ -1,5 +1,7 @@
 const ObjectID = require('mongodb').ObjectID;
 const COLLECTION_NAME = "application";
+const apicache = require('apicache');
+
 
 module.exports =  (db)  =>  {
 
@@ -7,6 +9,7 @@ module.exports =  (db)  =>  {
 
         getAll: (req, res) =>  {
             db.collection(COLLECTION_NAME).find({}).sort( { rating: -1 } ).toArray().then( (items) =>  {
+                req.apicacheGroup = COLLECTION_NAME;
                 res.json(items);
             }).catch( (err)  => {
                 res.status(401);
@@ -26,6 +29,7 @@ module.exports =  (db)  =>  {
         },
 
         create: (req, res) =>  {
+            apicache.clear(COLLECTION_NAME);
             const application = req.body;
             application.rating = 0;
             application.feedbacks = [];

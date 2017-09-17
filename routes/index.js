@@ -6,6 +6,7 @@ const applicationModel = require('../models/application.json');
 const feedbackModel = require('../models/feedback.json');
 const commentModel = require('../models/comment.json');
 const noteModel = require('../models/note.json');
+const apicache = require('apicache');
 
 
 
@@ -15,13 +16,14 @@ module.exports = (db) => {
     const application = require('./applications')(db);
     const comment = require('./comment')(db);
     const feedback = require('./feedback')(db);
+    const _cache     = apicache.middleware;
 
 
     router.post('/api/v1/register', [require('../middlewares/validateInput')(registerModel)], user.register);
     router.post('/api/v1/login', [require('../middlewares/validateInput')(loginModel)], user.login);
 
 
-    router.get('/api/v1/applications', application.getAll);
+    router.get('/api/v1/applications', _cache("7 days"),application.getAll);
     router.get('/api/v1/application/:id', application.getOne);
     router.post('/api/v1/application/', [require('../middlewares/validateInput')(applicationModel)], application.create);
 
