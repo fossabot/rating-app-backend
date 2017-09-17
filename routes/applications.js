@@ -41,7 +41,7 @@ module.exports =  (db)  =>  {
             });
         },
         addFeedback:  (appId,feedbackId,avgRating)  => {
-            apicache.clear(COLLECTION_NAME);
+            req.apicacheGroup = COLLECTION_NAME;
             const app = { '_id': new ObjectID(appId) };
             const feedback = { '_id': new ObjectID(feedbackId) };
             return db.collection(COLLECTION_NAME).updateOne(app,{
