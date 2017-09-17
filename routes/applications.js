@@ -1,6 +1,6 @@
 const ObjectID = require('mongodb').ObjectID;
 const COLLECTION_NAME = "application";
-const apicache = require('apicache');
+
 
 
 module.exports =  (db)  =>  {
@@ -29,7 +29,6 @@ module.exports =  (db)  =>  {
         },
 
         create: (req, res) =>  {
-            apicache.clear(COLLECTION_NAME);
             const application = req.body;
             application.rating = 0;
             application.feedbacks = [];
@@ -41,7 +40,6 @@ module.exports =  (db)  =>  {
             });
         },
         addFeedback:  (appId,feedbackId,avgRating)  => {
-            req.apicacheGroup = COLLECTION_NAME;
             const app = { '_id': new ObjectID(appId) };
             const feedback = { '_id': new ObjectID(feedbackId) };
             return db.collection(COLLECTION_NAME).updateOne(app,{
